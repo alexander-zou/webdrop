@@ -176,6 +176,8 @@ for iface in netifaces.interfaces():
 if len( myips) <= 0:
     myips.append( '127.0.0.1')
 myips = list( dict.fromkeys( myips)) # remove duplicates
+if myips[ 0] == '127.0.0.1':
+    myips[ 0], myips[ -1] = myips[ -1], myips[ 0]
 
 config_window = tk.Tk()
 config_window.title( 'WebDrop')
@@ -435,7 +437,7 @@ button_browse.pack( side=tk.RIGHT, padx=2)
 
 tk.Label( frame_lines[ 1], anchor=tk.E, text='IP').pack( side=tk.LEFT, padx=4)
 combobox_ip = ttk.Combobox( frame_lines[ 1], textvariable=var_ip, state='readonly', values=myips)
-combobox_ip.current( len( myips)-1)
+combobox_ip.current( 0)
 combobox_ip.pack( side=tk.LEFT)
 combobox_ip.bind( "<<ComboboxSelected>>", draw_qr)
 tk.Label( frame_lines[ 1], anchor=tk.E, text=TEXTS[ 'port']).pack( side=tk.LEFT, padx=4)
