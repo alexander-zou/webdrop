@@ -14,7 +14,7 @@ import tkinter.messagebox as tkmb
 from tkinter import ttk
 from tkinter import filedialog as tkfd
 from PIL import ImageTk
-from flask import Flask, request, make_response, render_template, render_template_string, redirect, abort, send_from_directory
+from flask import Flask, request, make_response, render_template_string, redirect, abort, send_from_directory
 import pyperclip, qrcode
 
 INVALID_FILENAMES = {
@@ -366,7 +366,8 @@ def clipboard():
         logged, update_cookies = is_login()
         if not logged:
             return redirect( '/login?url=/text')
-        return render_template( 'text.html')
+        else:
+            return redirect( '/')
 
 def click_browse( evt=None):
     new_path = tkfd.askdirectory( initialdir=var_path.get(), mustexist=True, title='选择工作目录')
