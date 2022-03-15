@@ -407,12 +407,13 @@ def check_server():
     global server_error, server_started
     if server_error is None:
         # tkmb.showinfo( title='成功', message='服务器启动成功,URL:\n' + url)
+        global config_window
+        config_window.title( 'WebDrop - ' + TEXTS[ 'running'])
         draw_qr()
     else:
         server_started = False
         tkmb.showerror( title=TEXTS[ 'error'], message=TEXTS[ 'server_failed']+':'+str( server_error))
-        global config_window, checkbutton_clipboard, button_start, button_browse, entry_pass, entry_port, entry_title
-        config_window.title( 'WebDrop - ' + TEXTS[ 'running'])
+        global checkbutton_clipboard, button_start, button_browse, entry_pass, entry_port, entry_title
         checkbutton_clipboard.config( state=tk.NORMAL)
         button_start.config( state=tk.NORMAL)
         button_browse.config( state=tk.NORMAL)
