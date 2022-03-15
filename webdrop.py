@@ -8,7 +8,7 @@
 @Brief  :  
 '''
 
-import os, threading, time, hashlib, netifaces, hashlib, subprocess, sys, platform
+import os, threading, time, hashlib, netifaces, hashlib, subprocess, sys, platform, locale
 import tkinter as tk
 import tkinter.messagebox as tkmb
 from tkinter import ttk
@@ -43,7 +43,7 @@ TEXTS = {
     'running' : 'Running',
 }
 try:
-    if os.getenv( 'LANG').startswith( 'zh_') and os.getenv( 'LANG').endswith( '.UTF-8'):
+    if locale.getdefaultlocale()[ 0].startswith( 'zh_'):
         TEXTS = {
             'password' : '密码',
             'read_clipboard' : '从电脑粘贴板读取',
@@ -447,7 +447,7 @@ entry_pass.pack( side=tk.LEFT, fill=tk.X, expand=tk.YES)
 
 canvas_qr = tk.Canvas( frame_lines[ 2], width=200, height=200)
 canvas_qr.pack( side=tk.LEFT)
-button_close = tk.Button( frame_lines[ 2], text=TEXTS[ 'quit'], command=exit)
+button_close = tk.Button( frame_lines[ 2], text=TEXTS[ 'quit'], command=sys.exit)
 button_close.pack( side=tk.RIGHT, padx=4, anchor=tk.S)
 button_start = tk.Button( frame_lines[ 2], text=TEXTS[ 'start'], command=click_start)
 button_start.pack( side=tk.RIGHT, padx=4, anchor=tk.S)
