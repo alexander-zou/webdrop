@@ -42,6 +42,7 @@ TEXTS = {
     'error' : 'Error',
     'server_failed' : 'Failed starting server',
     'running' : 'Running',
+    'choose_working_directory' : 'Choose working directory',
 }
 try:
     if locale.getdefaultlocale()[ 0].startswith( 'zh_'):
@@ -62,6 +63,7 @@ try:
             'error' : '错误',
             'server_failed' : '服务器启动失败',
             'running' : '运行中',
+            'choose_working_directory' : '选择工作目录',
         })
 except: pass
 
@@ -372,16 +374,26 @@ def clipboard():
             return redirect( '/')
 
 def click_browse( evt=None):
-    new_path = tkfd.askdirectory( initialdir=var_path.get(), mustexist=True, title='选择工作目录')
+    new_path = tkfd.askdirectory( initialdir=var_path.get(), mustexist=True, title=TEXTS[ 'choose_working_directory'])
     if new_path and len( new_path) > 0 and os.path.isdir( new_path):
         var_path.set( new_path)
+
+def click_open( evt=None):
+    path = var_path.get()
+    if sys.platform == 'win32':
+        os.system( 'start "" "%s"' % path)
+    elif sys.platform == 'darwin':
+        os.system( 'open "%s"' % path)
+    elif sys.platform.startswith == 'linux':
+        os.system( 'xdg-open "%s"' % path)
 
 def click_start( evt=None):
     # disable setting ui:
     global checkbutton_clipboard, button_start, button_browse, entry_pass, entry_port, entry_title
     checkbutton_clipboard.config( state=tk.DISABLED)
     button_start.config( state=tk.DISABLED)
-    button_browse.config( state=tk.DISABLED)
+    # button_browse.config( state=tk.DISABLED)
+    button_browse.config( text=TEXTS[ 'open']+'...', command=click_open)
     entry_pass.config( state='readonly')
     entry_port.config( state='readonly')
     entry_title.config( state='readonly')
