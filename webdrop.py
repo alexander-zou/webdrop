@@ -34,6 +34,7 @@ TEXTS = {
     'title' : 'Title',
     'path' : 'Path',
     'browse' : 'Broswe',
+    'open' : 'Open',
     'port' : 'Port',
     'quit' : 'Quit',
     'start' : 'Start',
@@ -44,7 +45,7 @@ TEXTS = {
 }
 try:
     if locale.getdefaultlocale()[ 0].startswith( 'zh_'):
-        TEXTS = {
+        TEXTS.update( {
             'password' : '密码',
             'read_clipboard' : '从电脑粘贴板读取',
             'write_clipboard' : '上传至电脑粘贴板',
@@ -53,6 +54,7 @@ try:
             'title' : '标题',
             'path' : '路径',
             'browse' : '浏览',
+            'open' : '打开',
             'port' : '端口',
             'quit' : '退出',
             'start' : '启动',
@@ -60,7 +62,7 @@ try:
             'error' : '错误',
             'server_failed' : '服务器启动失败',
             'running' : '运行中',
-        }
+        })
 except: pass
 
 TEMPLATE_LOGIN = '''
